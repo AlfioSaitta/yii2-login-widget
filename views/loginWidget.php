@@ -1,30 +1,41 @@
 <?php
-use yii\bootstrap\ActiveForm; 
+/**
+ * Copyright (c) 2016. Alfio Saitta
+ * All rights reserved.
+ */
+
+use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
-?>
-<div class="panel panel-default">
-  <div class="panel-heading"><?= $title ?></div>
-  <div class="panel-body">
-    <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
-        <?= $form->field($user, 'username', [
+
+    echo '<div class="panel-body">';
+
+        $form = ActiveForm::begin([
+            'id' => 'login-form',
+            'enableClientValidation' => false,
+            'enableAjaxValidation' => true,
+        ]);
+        ?>
+
+        <?= $form->field($model, 'identity', [
               'inputOptions' => [
-                  'placeholder' => $user->getAttributeLabel('username'),
+                  'placeholder' => $model->getAttributeLabel('identify'),
               ],
             ])->label(false);
         ?>
-        <?= $form->field($user, 'password', [
+
+        <?= $form->field($model, 'password', [
               'inputOptions' => [
-                  'placeholder' => $user->getAttributeLabel('password'),
+                  'placeholder' => $model->getAttributeLabel('password'),
               ],
             ])->passwordInput()->label(false);
         ?>
+
         <div style="color:#999;margin:1em 0">
-            If you forgot your password you can <?= Html::a('reset it', ['/site/request-password-reset']) ?>.
+            If you forgot your password you can <?= Html::a('reset it', ['user/sign-in/request-password-reset']) ?>.
         </div>
         <div class="form-group">
             <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-            <?= Html::a('Signup', ['/site/signup']) ?>
+            <?= Html::a('Signup', ['/user/sign-in/signup']) ?>
         </div>
-    <?php ActiveForm::end(); ?>
-  </div>
-</div>
+        <?php ActiveForm::end(); ?>
+    </div>

@@ -1,13 +1,13 @@
 {
-    "name": "shiyang/yii2-login-widget",
+    "name": "alfiosaitta/yii2-login-widget",
     "description": "This extension provides a login portlet  that provides user login functionality.",
     "type": "yii2-extension",
     "keywords": ["yii2","extension"],
     "license": "MIT",
     "authors": [
         {
-            "name": "Shiyang",
-            "email": "dr@shiyang.me"
+            "name": "Alfio Saitta",
+            "email": "info.collateral@gmail.com"
         }
     ],
     "minimum-stability": "stable",
@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "shiyang\\login\\": ""
+            "collateral\\login\\": ""
         }
     }
 }

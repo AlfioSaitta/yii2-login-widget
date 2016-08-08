@@ -1,37 +1,40 @@
 <?php
 /**
- * @copyright Copyright (c) 2015 Shiyang
- * @author Shiyang <dr@shiyang.me>
- * @link http://shiyang.me
- * @license http://opensource.org/licenses/MIT
+ * Copyright (c) 2016. Alfio Saitta
+ * All rights reserved.
  */
 
-namespace shiyang\login;
+namespace collateral\login;
 
+use yii;
+use yii\base\Widget;
 /**
  * LoginWidget is a widget that provides user login functionality.
  */
-class Login extends \yii\base\Widget
+class Login extends Widget
 {
-    /**
-     * @var string the widget title. Defaults to 'Login'.
-     */
     public $title='Login';
-
-    /**
-     * @var boolean whether the widget is visible. Defaults to true.
-     */
     public $visible = true;
 
     public function run()
     {
         if($this->visible) {
-            $user = new LoginForm;
-            if ($user->load(\Yii::$app->request->post()) && $user->login()) {
-                return \Yii::$app->getResponse()->refresh();
+            $model = new \frontend\modules\user\models\LoginForm;
+
+            /*
+            if (Yii::$app->request->isAjax) {
+                $model->load($_POST);
+                Yii::$app->response->format = Response::FORMAT_JSON;
+                return ActiveForm::validate($model);
+            }
+            */
+
+            if ($model->load(Yii::$app->request->post()) && $model->login()) {
+                Yii::$app->getResponse()->refresh();
+                return '';
             } else {
                 return $this->render('loginWidget', [
-                    'user' => $user,
+                    'model' => $model,
                     'title' => $this->title,
                 ]);
             }
